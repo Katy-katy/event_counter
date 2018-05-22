@@ -31,7 +31,7 @@ class Counter(object):
 
     def count_events(self, time_from='', time_to=''):
         """Count how many events happened from time_from (included)
-         to time_to (excluded).
+         to time_to (excluded). The precision is one second.
 
         Parameters
         ----------
@@ -45,7 +45,8 @@ class Counter(object):
             If not provided, the events will be cound up to
             current second. If it is "29.08.2017 11:05:02" now,
             the events that happened at "29.08.2017 11:05:01" will
-            be included.
+            be included, but the events that happened at
+            "29.08.2017 11:05:02" will not be included"
 
         Returns
         -------

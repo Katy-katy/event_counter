@@ -1,34 +1,46 @@
 from event_counter.counter import Counter
 import time
 
+my_counter = Counter()
 
-def test_counter():
-    my_counter = Counter()
+# test 1: count all events in Counter.events_by_seconds
+def test_counter1():
 
-    # test 1: add max allowed number of events
-    # (should take less than 300 seconds
+    for i in range(300):
+        my_counter.add_event()
+    time.sleep(1)
+    result = my_counter.count_events()
+    assert result==300
+
+# test 2: count events in an time interval
+def test_counter2():
+
+    time.sleep(1)
+    time_1 = time.strftime("%d.%m.%Y %H:%M:%S", time.localtime())
+    time.sleep(1)
+    for i in range(5):
+        my_counter.add_event()
+    time.sleep(1)
+    time_2 = time.strftime("%d.%m.%Y %H:%M:%S", time.localtime())
+    result = my_counter.count_events(time_1, time_2)
+    assert result==5
+
+# test 3: add max number of events
+def test_counter3():
     t0=time.time()
-    time_0 = time.strftime("%d.%m.%Y %H:%M:%S", time.localtime())
-
     for i in range(300):
         for k in range(1000000): # 1 mullion events per 1 sec
             my_counter.add_event()
-    time_1 = time.strftime("%d.%m.%Y %H:%M:%S", time.localtime())
+    result=time.time()-t0
     print("Adding 300 000 000 events took ",time.time()-t0)
 
-    # test 2: count all 300 000 000 events
-    t0=time.time()
-    result = my_counter.count_events(time_0, time_1)
-    t1 = time.time()
-    print("Calculating of", result, "events took ", t1-t0)
-
-    # test 3: count events from a specified time up to now
-    time_2 = time.strftime("%d.%m.%Y %H:%M:%S", time.localtime())
+# test 4: count all events for last 5 minutes (should take no more than 1 sec)
+def test_counter4():
     time.sleep(1)
+    t0=time.time()
+    result = my_counter.count_events()
+    t1 = time.time()-t0
+    print("Counting of ", result, "events took", t1)
+    assert t1<1
 
-    for i in range(100):
-        my_counter.add_event()
-    print("from", time_1, "up to now we have ", my_counter.count_events(time_2))
 
-    # test 4: count events for the last 5 minutes (default setting):
-    print("In the last 5 minutes we had", my_counter.count_events())
