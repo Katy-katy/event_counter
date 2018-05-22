@@ -9,5 +9,5 @@ setup(
     author='Ekaterina Tcareva',
     author_email='ek.tcareva@gmail.com',
     keywords=['counter'],
-    url='https://github.com....'
+    url='https://github.com/Katy-katy/event_counter'
 )
