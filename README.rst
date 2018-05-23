@@ -33,7 +33,7 @@ Example
 
     events_number = my_counter.count_events("21.05.2018 20:44:02", "21.05.2018 20:47:02")
 
-**Count events that heppened in the last 5 munutes:** ::
+**Count events that heppened in the last 5 munutes (current second will not be included):** ::
 
     events_number_5_min = my_counter.count_events()
 
