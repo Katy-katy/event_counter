@@ -1,5 +1,5 @@
-event_counter: Python module for counting the events in a short time interval
-=============================================================================
+event_counter: Python3 module for counting the events in a short time interval
+==============================================================================
 
 Counter can be used for keeping truck of events for
 the last 5 minutes (300 seconds) and counting the number
